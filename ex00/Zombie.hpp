@@ -6,7 +6,7 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 20:04:34 by jkovacev          #+#    #+#             */
-/*   Updated: 2026/01/20 21:55:19 by jkovacev         ###   ########.fr       */
+/*   Updated: 2026/01/21 08:29:27 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 					-> shows where it is destroyed (end of scope vs manual deletion)
 */
 
-class Zombie {
+class Zombie
+{
 	private:
 		std::string name;
 	
