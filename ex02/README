@@ -1,0 +1,38 @@
+This exercise is about helping you to see the relationship between:
+
+    - A normal variable
+    - A pointer to that variable
+    - A reference to that variable
+
+    By printing addresses and values, you can visually confirm what each one really is in memory
+    
+(1) The string variable
+        std::string str = "HI THIS IS BRAIN";
+        - this creates a std::string object named str
+        - str lives at some memory address (for example: 0x7ffee3a1b5c0)
+        - this is the "original" object that everything else refers to
+
+(2) The pointer
+        std::string* stringPTR = &str;
+        - stringPTR is a pointer
+        - it stores the address of str
+        - stringPTR itself is a variable with its own address, but its value is &str
+            -> Key ideas:   ->  stringPTR   - contains an address
+                            ->  *stringPTR  - the value at that address (the string itself)
+    
+(3) The reference
+        std::string& stringREF = str;
+        - stringREF is a reference, not a new object
+        - it is an alias for str
+        - it does not have its own memory address in the same sense
+        - anywhere you use stringREF, the program treats it as str
+            -> Key idea:    ->  a reference is just another name for the same variable
+    
+You must print three adresses:
+        (1) Address of the string variable: &str
+                ->  this is where the original string lives
+        (2) Address held by the pointer: stringPTR
+                ->  since stringPTR = &str, this will print the same address as &str
+        (3) Address held by the reference: &stringREF
+                ->  because stringREF is an alias for str, this will also print the same address
+        =>  All three addresses should be identical
