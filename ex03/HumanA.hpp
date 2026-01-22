@@ -6,7 +6,7 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 11:16:54 by jkovacev          #+#    #+#             */
-/*   Updated: 2026/01/22 21:06:58 by jkovacev         ###   ########.fr       */
+/*   Updated: 2026/01/22 21:24:30 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ class HumanA
 		Weapon& weapon;
 	
 	public:
-		HumanA(const std::string name, Weapon& weapon);
-		
+		HumanA(const std::string& name, Weapon& weapon);		
 		~HumanA();
 
 		void attack() const;
