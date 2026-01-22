@@ -1,0 +1,16 @@
+This exercise teaches 3 specific things:
+(1) File I/O in C++ (Stream manipulation)
+(2) String manipulation algorithmics 
+	(How to logically process text without relying on a "magic button" like .replace())
+(3) Error handling in a standard C++ context
+
+--- THE GOAL ---
+->	You are recreating a very simplified version of the Unix command:
+
+sed -i 's/s1/s2/g' filename
+
+->	Your program needs to read a file, find every instance of string s1,
+	change it to string s2, and save the result in a new file named <filename>.replace
+
+->	You must use the C++ standard library streams:	->	std::ifstream (Input File Stream) to read
+													->	std::ofstream (Output File Stream) to write	
