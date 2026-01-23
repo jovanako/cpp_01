@@ -102,3 +102,63 @@ Reference vs Pointer:	(1) What they are:	-> Reference is an alias for an existin
 						
 						REFERENCES - must exist and never change
 						POINTERS - may exist and may change
+
+Why does Weapon constructor have type parameter?
+	->	The constructor parameter enforces that every Weapon is valid from the moment it exists
+			->	because a Weapon should never exist without a valid type
+			->	the constructor forces the object to be fully initialized
+			->	with the constructor parameter 'Weapon club("crude spiked club"),
+				- the weapon is valid immediately
+				- 'type' is set at creation
+				- no invalid state is possible
+	Why not set the type later? -> because the object exists in invalid state until setType() is called
+								-> nothing forces the user to call it
+	This practice is called enforcing a <class invariant>
+	-> objects should be created in a valid state
+
+Why it is important in this exercise:
+	->	humans do not own weapons
+	->	weapons must already exist
+	->	humans only reference them
+
+--- Important concept: <invariants> ---
+
+An invariant is a condition that must ALWAYS be true for an object while it exists.
+
+- Weapon invariant -
+	What is a weapon?	- a weapon must have a type
+						- a weapon with no type is meaningless
+	
+	Invariant for Weapon:
+			Weapon::type is always a valid, non-empty string
+
+- Constructors enforce invariants -
+	-> The constructor's job is to establish the invariant
+	That's why you:	-> initialize references in constructors
+					-> validate parameters in constructors
+					-> prevent invalid states early
+
+	Invariants in HumanA and HumanB:
+		-> HumanA always has a weapon:	-> Weapon& weapon; (cannot be NULL)
+										-> HumanA(name, weapon);
+		-> HumanB may or may not have a weapon:	-> Weapon* weapon; (can be NULL)
+
+Golden rules of invariants:
+		(1)	Constructors establish invariants
+		(2) Public methods preserve invariants
+		(3) Private members exist to protect invariants
+		(4) Stronger invariants = simpler code
+		(5) If an invariant can be broken, it will be
+
+*** An invariant is the truth your class promises to always uphold
+	- and good C++ design makes it impossible to break.
+
+
+* HumanB constructor signature:
+		HumanB(const std::string& name);
+* HumanB constructor definition:
+		HumanB::HumanB(const std::string& name) : name(name), weapon(NULL) {}
+		
+*** Inside the constructor definition, we initialize weapon to NULL
+	because this is where we initialize member variables
+	regardless of the fact whether they are also a constructor's parameter or not

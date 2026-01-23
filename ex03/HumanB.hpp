@@ -6,7 +6,7 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 11:17:15 by jkovacev          #+#    #+#             */
-/*   Updated: 2026/01/22 21:24:28 by jkovacev         ###   ########.fr       */
+/*   Updated: 2026/01/23 20:53:46 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class HumanB
 {
 	private:
 		std::string name;
-		Weapon* weapon; // pointer because it may be NULL
+		Weapon* weapon;
 		
 	public:
 		HumanB(const std::string& name);		
