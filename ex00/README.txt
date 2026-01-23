@@ -11,6 +11,17 @@
 										-> shows when a zombie is destroyed
 										-> shows where it is destroyed (end of scope vs manual deletion)
 
+*** Why should the name variable be private?
+	- it enforces ENCAPSULATION	-> the object controls its own data
+								-> only the zombie class itself can access or modify it
+								-> other code must go through public functions
+		name is private to	-> protect the internal state of the object
+							-> control how the name is accessed or changed
+							-> enforce good object-oriented design habits
+							-> OUTSIDE CODE SHOULD NOT FREELY MODIFY A ZOMBIE'S NAME
+
+Rule of thumb:	all DATA MEMBERS should be PRIVATE unless you have a very good reason
+				PUBLIC: functions (behavior)
 
 ----- ZOMBIE.CPP -----
 
@@ -19,7 +30,7 @@
 						Zombie::Zombie		-> scope resolution operator - tells the compiler this is the 'Zombie' class's constructor
 						(std::string name)	-> constructor parameter - the caller must pass a string (e.g., "Brian") when creating a 'Zombie'
 						: name(name)		-> member initializer list	- initializes the private member variable 'name' with the parameter 'name'
-																		- tells C++: before running the constructor body, 
+																		- tells C++: before running the constructor body: 
 																			initialize these member variables with these values
 						std::cout			-> standard output stream
 						std::endl			-> ends the line with newline and flushes the output buffer
@@ -76,7 +87,7 @@
 
 ----- MAIN.CPP -----
 
-					main.cpp should:	- test a heap zombie (from newZombie)
+					main.cpp should:		- test a heap zombie (from newZombie)
 											- test a stack zombie (from randomChump)
 											- show destructor timing to understand lifetime
 					- Test 1: Heap allocation	->	create a zombie using newZombie

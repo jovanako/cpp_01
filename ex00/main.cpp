@@ -6,12 +6,30 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 20:02:27 by jkovacev          #+#    #+#             */
-/*   Updated: 2026/01/21 10:49:39 by jkovacev         ###   ########.fr       */
+/*   Updated: 2026/01/23 11:18:00 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 #include <iostream>
+
+/*	- Test 1: Heap allocation	
+	->	create a zombie using newZombie
+			->	call announce()
+			->	delete it manually
+			->	observe constructor and destructor messages
+				(constructor message appears immediately after newZombie, 
+					destructor message only after 'delete')
+
+	- Test 2: Stack allocation
+	->	call randomChump with a name
+			->	the zombie announces itself inside the function
+			->	destructor runs automatically at the end of the function
+						
+	- Test 3: Multiple zombies
+	->	create multiple zombies with both methods
+			->	observe order of destructor calls
+*/
 
 int main()
 {
