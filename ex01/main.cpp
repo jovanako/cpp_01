@@ -6,23 +6,12 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 08:25:13 by jkovacev          #+#    #+#             */
-/*   Updated: 2026/01/21 09:49:26 by jkovacev         ###   ########.fr       */
+/*   Updated: 2026/01/23 18:55:30 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 #include <iostream>
-
-/*	main.cpp should prove that:	- all Zombies exist
-								- all Zombies have the correct name
-								- announce() works for each one
-	
-	- Test 1 verifies: (1) Multiple Zombies, (2) Correct name assignment, (3) Loop access
-	- Test 2 verifies: (1) Works with smallest valid size, (2) No array logic bugs
-	- Test 3 verifies: (1) No shared state, (2) Separate allocations
-	- Test 4 verifies: (1) No crash, (2) Proper cleanup
-	- Test 5 verifies: (1) Performance, (2) No segmentation faults, (3) Proper loop logic
-*/
 
 int main()
 {
