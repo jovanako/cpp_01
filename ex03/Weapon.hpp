@@ -6,7 +6,7 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 11:16:34 by jkovacev          #+#    #+#             */
-/*   Updated: 2026/01/23 20:14:51 by jkovacev         ###   ########.fr       */
+/*   Updated: 2026/02/05 19:17:58 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 class Weapon
 {
 	private:
-		std::string type;
+		std::string _type;
 	
 	public:		
 		Weapon(const std::string& type);

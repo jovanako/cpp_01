@@ -6,7 +6,7 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 08:25:30 by jkovacev          #+#    #+#             */
-/*   Updated: 2026/01/23 18:52:42 by jkovacev         ###   ########.fr       */
+/*   Updated: 2026/02/05 19:17:18 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ Zombie::~Zombie() {}
 
 void Zombie::setName(std::string name)
 {
-	this->name = name;
+	this->_name = name;
 }
 
 void Zombie::announce(void)
 {
-	std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+	std::cout << _name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
