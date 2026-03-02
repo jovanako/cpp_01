@@ -1,57 +1,95 @@
---- What this exercise is testing ---
-	-> command-line argument handling
-	-> C++ file streams
-	-> manual string manipulation
-	-> edge-case handling
-	-> clean, readable code
-	-> following constraints precisely
+--- std::stringstream buffer; ---
 
---- THE GOAL ---
-->	You are recreating a very simplified version of the Unix command:
+-	Think of std::stringstream as a temporary holding tank (a buffer) in your
+	program's memory. It allows you to treat a regular std::string exactly 
+	like you would an input/output stream (like std::cin, std::cout, or a 
+	file stream).
 
-sed -i 's/s1/s2/g' filename
+-	Three most common use cases:
+	
+	(1)	Reading an entire file into a string
+		When you open a file with std::ifstream, reading it line-by-line using
+		std::getline can be tedious if you just want to grab all the text at once.
+		std::stringstream makes this incredibly easy using the file stream's buffer
+		(rdbuf()).
+	
+	(2)	Extracting data (parsing strings)
+		If you have a string with formatted data (like "User 42 99.5"), you can
+		use stringstream to extract that data into the correct variable types,
+		exactly like you would use std::cin.
 
-->	Your program needs to read a file, find every instance of string s1,
-	change it to string s2, and save the result in a new file named <filename>.replace
+				std::string data = "John 42 99.5";
+				std::stringstream ss(data); // Initialize the stream with the string
 
-->	You must use the C++ standard library streams:	->	std::ifstream (Input File Stream) to read
-													->	std::ofstream (Output File Stream) to write
+				std::string name;
+				int age;
+				float score;
 
-(1) GOAL OF THE EXERCISE:
-	-> write a C++ program that:	1. takes 3 command-line arguments: ./program filename s1 s2
-									2. reads the contents of 'filename'
-									3. creates a new file named: 'filename.replace'
-									4. writes the file's content into a new file, but:
-										- every occurence of 's1' is replaced by 's2'
+				// Extract the data into variables
+				ss >> name >> age >> score;
 
-(2) PROGRAM INPUTS(VERY IMPORTANT):
-	-> Command-line arguments	- error cases to handle:	- wrong number of arguments (argc != 4)
-															- file cannot be opened
-															- empty 's1' (this is critical)
+				std::cout << "Name: " << name << ", Age: " << age << std::endl;
+	
+	(3) Building strings (formatting)
+		You can also use it in reverse. If you have various data types and want to 
+		stitch them together into a single string (similar to sprintf in C), you 
+		push them into the stream using <<.
 
-(3) FILE HANDLING RULES (STRICT):	X FORBIDDEN:	FILE*, fopen, fread, fwrite, fprintf, etc.
-									REQUIRED:		use C++ file streams:
-													->	std::ifstream (Input File Stream) for reading
-													->	std::ofstream (Output File Stream) for writing
+				int score = 100;
+				std::string player = "Alice";
 
-(4) STRING MANIPULATION RULES:	X FORBIDDEN:	std::string::replace
-								ALLOWED:		all other std::string member functions:
-												- find, substr, append, erase, insert, length, size, operator +, etc.
+				std::stringstream ss;
 
-(5) EMPTY STRING EDGE CASES (VERY IMPORTANT):
-		- If 's1' is empty	- detect that 's1' is empty
-							- print an error or exit safely
+				// Build the string piece by piece
+				ss << "Player " << player << " scored " << score << " points.";
 
-7. How you’re expected to think about the solution
+				// Get the final string
+				std::string finalString = ss.str();
 
-			(1)Read the file		- Either line by line (std::getline)
-									- Or whole file into a string
+				std::cout << finalString << std::endl;
 
-			(2) Process the text	- Search for s1
-									- Copy text into a result string
-									- When s1 is found, append s2 instead
-									- Move forward manually
+(1) Automatic memory management
+	
+	In C++, standard library classes like std::stringstream (and std::string,
+	std::vector, etc.) manage their own memory under the hood.
 
-			(3) Write the result	- Output to <filename>.replace
+	When you declare std::stringstream buffer;, the C++ compiler creates the
+	object on the stack. Inside that object is a pointer to a chunk of memory
+	on the heap.
 
-		You are essentially implementing your own string replacement algorithm.
+(2) It grows automatically
+
+	When you pipe the file contents into the buffer 
+	(buffer << inputFile.rdbuf();),
+	the stringstream looks at the size of the incoming data. If its current
+	internal memory block isn't big enough, it automatically calls the
+	equivalent of realloc() behind the scenes, asks the OS for more memory,
+	and copies the data in. You don't have to calculate sizes or worry about
+	buffer overflows.
+
+(3) It cleans up after itself
+
+	Just as you dont' use malloc, you also don't use free.
+	When the buffer variable goes out of scope (for example, when your main
+	function hits return 0;), C++ automatically calls a special function
+	called a destructor. The stringstream destructor looks at the heap memory
+	it allocated, frees it, and cleanly destroys the object. No leaks!
+
+--- In C++, you let the objects do the heavy lifting. You just declare the
+	object,	use it, and let it clean itself up when it's done. ---
+
+--- main.cpp ---
+
+line:	Replacer replacer(argv[1], argv[2], argv[3]);
+	->	The C++ compiler does the following:
+		1. It sees argv[1] is a char *
+		2. It looks at your Replacer constructor and sees it requires
+			a std::string
+		3. It realizes that std::string knows how to build itself
+			from a char *
+		4. It automatically calls the std::string constructor, creates
+			a temporary string object using the text from argv[1], and
+			passes that fully-formed std::string into your Replacer class
+	
+	-> You could also write:
+		Replacer replacer(std::string(argv[1]), std::string(argv[2]), std::string(argv[3]);)

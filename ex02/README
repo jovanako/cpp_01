@@ -8,7 +8,7 @@ This exercise is about helping you to see the relationship between:
     
 (1) The string variable
         std::string str = "HI THIS IS BRAIN";
-        - this creates a std::string object named str
+        - this creates a std:: object named str
         - str lives at some memory address (for example: 0x7ffee3a1b5c0)
         - this is the "original" object that everything else refers to
 
