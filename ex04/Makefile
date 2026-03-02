@@ -6,7 +6,7 @@
 #    By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/22 22:00:13 by jkovacev          #+#    #+#              #
-#    Updated: 2026/03/02 20:32:53 by jkovacev         ###   ########.fr        #
+#    Updated: 2026/03/02 20:47:33 by jkovacev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,5 +39,8 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+test: $(NAME)
+		@bash test.sh
 
 .PHONY: all clean fclean re
