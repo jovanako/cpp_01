@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Colors for pretty output
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 YELLOW='\033[0;33m'
@@ -22,46 +21,46 @@ echo -e "\n${YELLOW}--- Running Tests ---${NC}"
 echo -e "${GREEN}[Test 1] Normal replacement: 'world' -> '42'${NC}"
 ./replace test1.txt "world" "42"
 cat test1.txt.replace
-echo ""
+echo
 
 # Test 2: Multiple occurrences on one line
 echo -e "${GREEN}[Test 2] Multiple replacements: 'apple' -> 'orange'${NC}"
 ./replace test2.txt "apple" "orange"
 cat test2.txt.replace
-echo ""
+echo
 
 # Test 3: Empty s1 (The infinite loop trap)
 echo -e "${GREEN}[Test 3] Empty s1 (Should not hang, should copy original)${NC}"
 ./replace test1.txt "" "42"
 cat test1.txt.replace
-echo ""
+echo
 
 # Test 4: Empty s2 (Deletion)
 echo -e "${GREEN}[Test 4] Empty s2 (Should delete 'apple')${NC}"
 ./replace test2.txt "apple" ""
 cat test2.txt.replace
-echo ""
+echo
 
 # Test 5: Empty File
 echo -e "${GREEN}[Test 5] Empty input file${NC}"
 ./replace empty.txt "a" "b"
 cat empty.txt.replace
-echo ""
+echo
 
 # Test 6: File does not exist
 echo -e "${GREEN}[Test 6] Non-existent file (Should print error, not crash)${NC}"
 ./replace does_not_exist.txt "a" "b"
-echo ""
+echo
 
 # Test 7: Permission denied
 echo -e "${GREEN}[Test 7] File without read permissions (Should print error)${NC}"
 ./replace no_perm.txt "a" "b"
-echo ""
+echo
 
 # Test 8: Wrong number of arguments
 echo -e "${GREEN}[Test 8] Wrong number of arguments (Should print usage error)${NC}"
 ./replace test1.txt "a"
-echo ""
+echo
 
 echo -e "${YELLOW}--- Cleaning up ---${NC}"
 chmod 644 no_perm.txt # Restore permissions so rm can delete it
